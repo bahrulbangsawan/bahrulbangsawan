@@ -1,7 +1,7 @@
 <a href="https://bahrul.me">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="assets/hero-dark.svg">
-    <img src="assets/hero-light.svg" width="100%" alt="Bahrul Bangsawan, GTM Engineer. I help businesses get more customers.">
+    <img src="assets/hero-light.svg" width="100%" alt="Bahrul Bangsawan, GTM Engineer. I help businesses get more customers. Available for new work.">
   </picture>
 </a>
 
@@ -15,6 +15,20 @@
 </p>
 
 I'm a go-to-market engineer in Indonesia. I build websites and apps for businesses, automate their repetitive marketing work, and set up the data that shows what works. Along the way I build the developer tools I wish I had, and I open-source them here.
+
+### Activity
+
+<p>
+  <picture><source media="(prefers-color-scheme: dark)" srcset="assets/stats-dark.svg"><img src="assets/stats-light.svg" width="100%" alt="GitHub activity in numbers: contributions in the last 12 months, current streak, longest streak and busiest day."></picture>
+</p>
+<p>
+  <picture><source media="(prefers-color-scheme: dark)" srcset="assets/contributions-dark.svg"><img src="assets/contributions-light.svg" width="100%" alt="GitHub contribution calendar for the last year."></picture>
+</p>
+
+<p>
+  <picture><source media="(prefers-color-scheme: dark)" srcset="assets/weekly-dark.svg"><img src="assets/weekly-light.svg" width="49%" alt="Contributions per week over the last year."></picture>
+  <picture><source media="(prefers-color-scheme: dark)" srcset="assets/languages-dark.svg"><img src="assets/languages-light.svg" width="49%" alt="Languages across my public repositories, by code size."></picture>
+</p>
 
 ### Tools I build
 
