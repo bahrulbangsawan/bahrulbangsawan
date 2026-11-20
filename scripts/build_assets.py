@@ -141,6 +141,16 @@ query($login: String!) {
 }
 """
 
+PRIOR_QUERY = """
+query($login: String!, $from: DateTime!, $to: DateTime!) {
+  user(login: $login) {
+    contributionsCollection(from: $from, to: $to) {
+      contributionCalendar { weeks { contributionDays { date contributionCount } } }
+    }
+  }
+}
+"""
+
 LEVELS = {"NONE": 0, "FIRST_QUARTILE": 1, "SECOND_QUARTILE": 2, "THIRD_QUARTILE": 3, "FOURTH_QUARTILE": 4}
 LEVEL_ALPHA = [0, 0.30, 0.50, 0.75, 1.0]  # the ramp bahrul.me uses on its red
 LOOP = 20  # seconds; charts replay their entrance on this period
@@ -165,7 +175,25 @@ def fetch_github() -> dict:
     body = get_json("https://api.github.com/graphql", {"query": QUERY, "variables": {"login": LOGIN}}, token)
     if body.get("errors"):
         raise SystemExit(f"GitHub API error: {body['errors']}")
-    return body["data"]["user"]
+    user = body["data"]["user"]
+    # The 365 days before the current calendar, for the trend markers.
+    first = dt.date.fromisoformat(user["contributionsCollection"]["contributionCalendar"]["weeks"][0]["contributionDays"][0]["date"])
+    span = {
+        "login": LOGIN,
+        "from": f"{first - dt.timedelta(days=365)}T00:00:00Z",
+        "to": f"{first - dt.timedelta(days=1)}T23:59:59Z",
+    }
+    prior = get_json("https://api.github.com/graphql", {"query": PRIOR_QUERY, "variables": span}, token)
+    if prior.get("errors"):
+        raise SystemExit(f"GitHub API error: {prior['errors']}")
+    weeks = prior["data"]["user"]["contributionsCollection"]["contributionCalendar"]["weeks"]
+    user["priorDays"] = [
+        d["contributionCount"]
+        for w in weeks
+        for d in w["contributionDays"]
+        if span["from"][:10] <= d["date"] <= span["to"][:10]
+    ]
+    return user
 
 
 def fetch_site() -> dict:
@@ -223,6 +251,24 @@ def summarize(user: dict, site: dict) -> dict:
             break
         current += 1
 
+    def longest_run(counts: list[int]) -> int:
+        best = cur = 0
+        for c in counts:
+            cur = cur + 1 if c else 0
+            best = max(best, cur)
+        return best
+
+    prior = user.get("priorDays") or []
+    # The streak before the current one: walk back past it and the gap that ended the earlier one.
+    history = prior + [d["count"] for d in tail]
+    i = len(history) - 1 - current
+    while i >= 0 and not history[i]:
+        i -= 1
+    previous_streak = 0
+    while i >= 0 and history[i]:
+        previous_streak += 1
+        i -= 1
+
     by_weekday = [0] * 7  # Monday first
     months: dict[tuple[int, int], int] = {}
     for d in days:
@@ -279,6 +325,12 @@ def summarize(user: dict, site: dict) -> dict:
         "longest": longest,
         "active": sum(1 for d in days if d["count"]),
         "best": max(days, key=lambda d: d["count"]),
+        "last365": sum(d["count"] for d in days[-365:]),
+        "prior_total": sum(prior),
+        "prior_longest": longest_run(prior),
+        "prior_best": max(prior, default=0),
+        "previous_streak": previous_streak,
+        "has_prior": bool(prior),
         "by_weekday": by_weekday,
         "months": months,
         "languages": top,
@@ -495,36 +547,142 @@ def link_button(t: dict, label: str, icon: str, primary: bool) -> str:
 
 # ---------------------------------------------------------------- stat tiles
 
+FLAME = (
+    "M12 2C12 6 17 8.5 17 14A5 5 0 0 1 7 14C7 11.8 8 10.2 9.2 9C9.4 10.6 10 11.6 11 12C10.6 8.5 11 5 12 2Z",
+    "M12 12.5C12 14.5 14.2 15.2 14.2 17.2A2.2 2.2 0 0 1 9.8 17.2C9.8 15.4 11.4 14.6 12 12.5Z",
+)
+FLAME_COLORS = {"#121212": ("#f97316", "#fbbf24"), "#faf9f6": ("#c2410c", "#f59e0b")}  # the site's chart orange
+TREND_ICONS = {
+    "up": "M3 17l6-6 4 4 8-8M15 7h6v6",
+    "down": "M3 7l6 6 4-4 8 8M15 17h6v-6",
+    "flat": "M4 12h16",
+}
 
-def tiles(t: dict, title: str, items: list[tuple[str, str, str]]) -> str:
+
+def trend(now: float, before: float, unit: str = "%") -> tuple[str, str] | None:
+    """(direction, label) against an earlier value; None when there is nothing to compare."""
+    if before is None or (unit == "%" and not before):
+        return None
+    if unit == "%":
+        change = round((now - before) / before * 100)
+        # Past +1,000% a percentage stops meaning much; say how many times bigger instead.
+        label = f"{round(now / before):,}\u00d7" if change >= 1000 else f"{change:+d}%"
+    else:
+        change = round(now - before)
+        label = f"{change:+d} {unit if abs(change) != 1 else unit.rstrip('s')}"
+    if change == 0:
+        return ("flat", "no change")
+    return ("up" if change > 0 else "down", label.replace("-", "\u2212"))
+
+
+def tiles(t: dict, title: str, items: list[dict]) -> str:
     w, h, gap = 1280, 176, 16
     tile_w = (w - gap * (len(items) - 1)) / len(items)
-    parts = []
-    for i, (label, value, sub) in enumerate(items):
+    digit_w, comma_w, row_h, base = 36, 15, 64, 112
+    parts, css, lengths = [], [], set()
+    for i, item in enumerate(items):
         x = i * (tile_w + gap)
-        parts.append(
-            f"""  <g class="fu" style="animation-delay:{i * 0.09:.2f}s">
-    <rect x="{x + 0.5:.1f}" y="0.5" width="{tile_w - 1:.1f}" height="{h - 1}" rx="16" fill="{t["bg"]}" stroke="{t["border"]}"/>
-    <text x="{x + 28:.1f}" y="46" class="mono" font-size="13" font-weight="600" letter-spacing="2.1" fill="{t["faint"]}">{escape(label)}</text>
-    <text x="{x + 26:.1f}" y="112" class="sans num" font-size="58" font-weight="700" letter-spacing="-2" fill="{t["text"]}">{escape(value)}</text>
-    <text x="{x + 28:.1f}" y="146" class="sans" font-size="17" fill="{t["muted"]}">{escape(sub)}</text>
-  </g>"""
+        out = [
+            f'    <rect x="{x + 0.5:.1f}" y="0.5" width="{tile_w - 1:.1f}" height="{h - 1}" rx="16" fill="{t["bg"]}" stroke="{t["border"]}"/>',
+            f'    <text x="{x + 28:.1f}" y="46" class="mono" font-size="13" font-weight="600" letter-spacing="2.1" fill="{t["faint"]}">{escape(item["label"])}</text>',
+        ]
+        # The number: one clipped column per digit, rolling up from 0 to its value.
+        cx = x + 26
+        text = num(item["value"])
+        for j, ch in enumerate(text):
+            if ch == ",":
+                out.append(
+                    f'    <text x="{cx + comma_w / 2 - 1:.1f}" y="{base}" class="sans" font-size="58" font-weight="700" text-anchor="middle" fill="{t["text"]}">,</text>'
+                )
+                cx += comma_w
+                continue
+            d = int(ch)
+            strip = list(range(d, -1, -1)) + list(range(9, -1, -1))  # shown last to first: 0..9, 0..d
+            lengths.add(len(strip))
+            cid = f"c{i}_{j}"
+            digits = "".join(
+                f'<text x="{cx + digit_w / 2:.1f}" y="{base + k * row_h}" text-anchor="middle">{v}</text>' for k, v in enumerate(strip)
+            )
+            out.append(
+                f'    <clipPath id="{cid}"><rect x="{cx:.1f}" y="{base - 52}" width="{digit_w}" height="{row_h}"/></clipPath>'
+                f'<g clip-path="url(#{cid})"><g class="sans roll r{len(strip)}" style="animation-delay:{j * 0.09:.2f}s" '
+                f'font-size="58" font-weight="700" fill="{t["text"]}">{digits}</g></g>'
+            )
+            cx += digit_w
+        if item.get("flame"):
+            outer, inner = FLAME_COLORS[t["bg"]]
+            out.append(
+                f'    <g transform="translate({cx + 8:.1f} 66) scale(1.9)"><g class="flame">'
+                f'<path d="{FLAME[0]}" fill="{outer}"/><path class="core" d="{FLAME[1]}" fill="{inner}"/></g></g>'
+            )
+        tr = item.get("trend")
+        if tr:
+            direction, label = tr
+            color = {"up": t["green"], "down": t["red"], "flat": t["faint"]}[direction]
+            right = x + tile_w - 26
+            icon_x = right - len(label) * 8.3 - 32
+            out.append(
+                f'    <path transform="translate({icon_x:.1f} 31) scale(0.8)" d="{TREND_ICONS[direction]}" fill="none" stroke="{color}" '
+                f'stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>'
+                f'<text x="{right:.1f}" y="46" class="sans num" font-size="15" font-weight="700" text-anchor="end" fill="{t["text"]}">{escape(label)}</text>'
+            )
+        out.append(f'    <text x="{x + 28:.1f}" y="146" class="sans num" font-size="16" fill="{t["muted"]}">{escape(item["sub"])}</text>')
+        parts.append(f'  <g class="fu" style="animation-delay:{i * 0.09:.2f}s">\n' + "\n".join(out) + "\n  </g>")
+    for n in sorted(lengths):
+        css.append(
+            f".r{n} {{ animation-name: r{n}; }} @keyframes r{n} {{ 0% {{ transform: translateY(-{(n - 1) * row_h}px); opacity: 0; }} "
+            f"1.5% {{ opacity: 1; }} 10% {{ transform: translateY(0); }} 95% {{ transform: translateY(0); opacity: 1; }} "
+            f"100% {{ transform: translateY(0); opacity: 0; }} }}"
         )
-    desc = "; ".join(f"{label.title()}: {value} {sub}" for label, value, sub in items)
-    return svg(w, h, title, desc, "\n".join(parts))
+    css.append(f".roll {{ animation: {LOOP}s cubic-bezier(.16,.84,.3,1) infinite both; }}")
+    css.append(
+        ".flame { transform-box: fill-box; transform-origin: center bottom; animation: flick 1.3s ease-in-out infinite; }"
+        " .core { transform-box: fill-box; transform-origin: center bottom; animation: flick .9s ease-in-out infinite reverse; }"
+        " @keyframes flick { 0%, 100% { transform: scale(1, 1) rotate(0); } 30% { transform: scale(.94, 1.07) rotate(-2deg); }"
+        " 65% { transform: scale(1.05, .95) rotate(2deg); } }"
+    )
+
+    def spoken(item: dict) -> str:
+        words = f'{item["label"].title()}: {num(item["value"])}, {item["sub"]}'
+        return words + (f' ({item["trend"][1]})' if item.get("trend") else "")
+
+    return svg(w, h, title, "; ".join(spoken(i) for i in items), "\n".join(parts), "\n    ".join(css))
 
 
 def github_tiles(t: dict, s: dict) -> str:
     best = s["best"]
-    days = lambda n: "day" if n == 1 else "days in a row"  # noqa: E731
+    day = f'{best["date"].strftime("%b")} {best["date"].day}'
+    cmp = s["has_prior"]
     return tiles(
         t,
-        "GitHub activity in numbers",
+        "GitHub activity in numbers, compared with the year before",
         [
-            ("CONTRIBUTIONS", num(s["total"]), "in the last 12 months"),
-            ("CURRENT STREAK", num(s["current"]), days(s["current"])),
-            ("LONGEST STREAK", num(s["longest"]), days(s["longest"])),
-            ("BUSIEST DAY", num(best["count"]), f'on {best["date"].strftime("%b")} {best["date"].day}, {best["date"].year}'),
+            {
+                "label": "CONTRIBUTIONS",
+                "value": s["total"],
+                "sub": f'{num(s["prior_total"])} the year before' if cmp else "in the last 12 months",
+                "trend": trend(s["last365"], s["prior_total"]) if cmp else None,
+            },
+            {
+                "label": "CURRENT STREAK",
+                "value": s["current"],
+                "flame": s["current"] > 0,
+                "sub": f'days in a row · {num(s["previous_streak"])} last time',
+                "trend": trend(s["current"], s["previous_streak"], "days"),
+            },
+            {
+                "label": "LONGEST STREAK",
+                "value": s["longest"],
+                "flame": True,
+                "sub": f'days · {num(s["prior_longest"])} the year before' if cmp else "days in a row",
+                "trend": trend(s["longest"], s["prior_longest"], "days") if cmp else None,
+            },
+            {
+                "label": "BUSIEST DAY",
+                "value": best["count"],
+                "sub": f'{day} · {num(s["prior_best"])} the year before' if cmp else f"on {day}, {best['date'].year}",
+                "trend": trend(best["count"], s["prior_best"]) if cmp else None,
+            },
         ],
     )
 
@@ -536,10 +694,10 @@ def work_tiles(t: dict, s: dict) -> str:
         t,
         "Work in numbers, from bahrul.me",
         [
-            ("PROJECTS SHIPPED", num(s["projects"]), "live on bahrul.me"),
-            ("CLIENTS", num(s["clients"]), "businesses worked with"),
-            ("CASE STUDIES", num(s["cases"]), "written up in detail"),
-            ("YEARS IN THE FIELD", num(years), f"since {first.year}"),
+            {"label": "PROJECTS SHIPPED", "value": s["projects"], "sub": "live on bahrul.me"},
+            {"label": "CLIENTS", "value": s["clients"], "sub": "businesses worked with"},
+            {"label": "CASE STUDIES", "value": s["cases"], "sub": "written up in detail"},
+            {"label": "YEARS IN THE FIELD", "value": years, "sub": f"since {first.year}"},
         ],
     )
 

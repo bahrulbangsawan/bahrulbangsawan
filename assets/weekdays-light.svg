@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 320" width="620" height="320" role="img" aria-labelledby="t d">
   <title id="t">Contributions by day of the week</title>
-  <desc id="d">Mon 1,387, Tue 1,062, Wed 1,110, Thu 966, Fri 1,065, Sat 1,447, Sun 990</desc>
+  <desc id="d">Mon 1,387, Tue 1,062, Wed 1,110, Thu 966, Fri 1,066, Sat 1,447, Sun 990</desc>
   <style>
     .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
     .mono { font-family: 'Geist Mono', ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Monaco, Consolas, 'Liberation Mono', monospace; }
@@ -33,7 +33,7 @@
   <text x="231.7" y="274" class="sans" font-size="13" text-anchor="middle" fill="#6f6e6b">Wed</text>
   <path class="growy" style="animation-delay:0.15s" d="M288.0,250 V161.9 Q288.0,157.9 292.0,157.9 H328.0 Q332.0,157.9 332.0,161.9 V250 Z" fill="#c10007"/>
   <text x="310.0" y="274" class="sans" font-size="13" text-anchor="middle" fill="#6f6e6b">Thu</text>
-  <path class="growy" style="animation-delay:0.20s" d="M366.3,250 V152.4 Q366.3,148.4 370.3,148.4 H406.3 Q410.3,148.4 410.3,152.4 V250 Z" fill="#c10007"/>
+  <path class="growy" style="animation-delay:0.20s" d="M366.3,250 V152.3 Q366.3,148.3 370.3,148.3 H406.3 Q410.3,148.3 410.3,152.3 V250 Z" fill="#c10007"/>
   <text x="388.3" y="274" class="sans" font-size="13" text-anchor="middle" fill="#6f6e6b">Fri</text>
   <path class="growy" style="animation-delay:0.25s" d="M444.6,250 V116.0 Q444.6,112.0 448.6,112.0 H484.6 Q488.6,112.0 488.6,116.0 V250 Z" fill="#c10007"/>
   <text x="466.6" y="103.0" class="sans num" font-size="14" font-weight="700" text-anchor="middle" fill="#1e1e1d">1,447</text>

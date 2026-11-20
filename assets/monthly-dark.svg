@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 320" width="620" height="320" role="img" aria-labelledby="t d">
   <title id="t">Contributions per month</title>
-  <desc id="d">Nov 2025 1, Dec 2025 74, Jan 2026 205, Feb 2026 238, Mar 2026 116, Apr 2026 187, May 2026 303, Jun 2026 291, Jul 2026 1,772, Aug 2026 872, Sep 2026 1,082, Oct 2026 1,260, Nov 2026 1,626</desc>
+  <desc id="d">Nov 2025 1, Dec 2025 74, Jan 2026 205, Feb 2026 238, Mar 2026 116, Apr 2026 187, May 2026 303, Jun 2026 291, Jul 2026 1,772, Aug 2026 872, Sep 2026 1,082, Oct 2026 1,260, Nov 2026 1,627</desc>
   <style>
     .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
     .mono { font-family: 'Geist Mono', ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Monaco, Consolas, 'Liberation Mono', monospace; }
@@ -50,6 +50,6 @@
   <text x="478.6" y="274" class="sans" font-size="13" text-anchor="middle" fill="#8e8e8c">Sep</text>
   <path class="growy" style="animation-delay:0.55s" d="M505.6,250 V155.9 Q505.6,151.9 509.6,151.9 H531.9 Q535.9,151.9 535.9,155.9 V250 Z" fill="#ff6467"/>
   <text x="520.8" y="274" class="sans" font-size="13" text-anchor="middle" fill="#8e8e8c">Oct</text>
-  <path class="growy" style="animation-delay:0.60s" d="M547.7,250 V127.4 Q547.7,123.4 551.7,123.4 H574.1 Q578.1,123.4 578.1,127.4 V250 Z" fill="#ff6467"/>
+  <path class="growy" style="animation-delay:0.60s" d="M547.7,250 V127.3 Q547.7,123.3 551.7,123.3 H574.1 Q578.1,123.3 578.1,127.3 V250 Z" fill="#ff6467"/>
   <text x="562.9" y="274" class="sans" font-size="13" text-anchor="middle" fill="#8e8e8c">Nov</text>
 </svg>
