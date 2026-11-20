@@ -1,22 +1,20 @@
-<a href="https://bahrul.me">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="assets/hero-dark.svg">
-    <img src="assets/hero-light.svg" width="100%" alt="Bahrul Bangsawan, GTM Engineer. I help businesses get more customers. Available for new work.">
-  </picture>
-</a>
+<p>
+  <a href="https://bahrul.me"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/hero-dark.svg"><img src="assets/hero-light.svg" width="100%" alt="Bahrul Bangsawan, GTM Engineer. I help businesses get more customers."></picture></a>
+</p>
 
 <p align="center">
-  <a href="https://bahrul.me"><b>bahrul.me</b></a> ·
-  <a href="https://bahrul.me/book">Book a call</a> ·
-  <a href="mailto:project@bahrul.me">project@bahrul.me</a> ·
-  <a href="https://linkedin.com/in/bahrulbangsawan">LinkedIn</a> ·
-  <a href="https://x.com/work_bahrul">X</a> ·
-  <a href="https://instagram.com/bahrulbangsawan">Instagram</a>
+  <a href="https://bahrul.me"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/link-site-dark.svg"><img src="assets/link-site-light.svg" height="36" alt="bahrul.me"></picture></a>
+  <a href="https://bahrul.me/book"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/link-book-dark.svg"><img src="assets/link-book-light.svg" height="36" alt="Book a call"></picture></a>
+  <a href="mailto:project@bahrul.me"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/link-email-dark.svg"><img src="assets/link-email-light.svg" height="36" alt="Email project@bahrul.me"></picture></a>
+  <a href="https://linkedin.com/in/bahrulbangsawan"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/link-linkedin-dark.svg"><img src="assets/link-linkedin-light.svg" height="36" alt="LinkedIn"></picture></a>
+  <a href="https://x.com/work_bahrul"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/link-x-dark.svg"><img src="assets/link-x-light.svg" height="36" alt="X"></picture></a>
+  <a href="https://instagram.com/bahrulbangsawan"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/link-instagram-dark.svg"><img src="assets/link-instagram-light.svg" height="36" alt="Instagram"></picture></a>
+  <a href="https://threads.net/@bahrulbangsawan"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/link-threads-dark.svg"><img src="assets/link-threads-light.svg" height="36" alt="Threads"></picture></a>
 </p>
 
 I'm a go-to-market engineer in Indonesia. I build websites and apps for businesses, automate their repetitive marketing work, and set up the data that shows what works. Along the way I build the developer tools I wish I had, and I open-source them here.
 
-### Activity
+### GitHub activity
 
 <p>
   <picture><source media="(prefers-color-scheme: dark)" srcset="assets/stats-dark.svg"><img src="assets/stats-light.svg" width="100%" alt="GitHub activity in numbers: contributions in the last 12 months, current streak, longest streak and busiest day."></picture>
@@ -24,11 +22,28 @@ I'm a go-to-market engineer in Indonesia. I build websites and apps for business
 <p>
   <picture><source media="(prefers-color-scheme: dark)" srcset="assets/contributions-dark.svg"><img src="assets/contributions-light.svg" width="100%" alt="GitHub contribution calendar for the last year."></picture>
 </p>
-
 <p>
   <picture><source media="(prefers-color-scheme: dark)" srcset="assets/weekly-dark.svg"><img src="assets/weekly-light.svg" width="49%" alt="Contributions per week over the last year."></picture>
+  <picture><source media="(prefers-color-scheme: dark)" srcset="assets/weekdays-dark.svg"><img src="assets/weekdays-light.svg" width="49%" alt="Contributions by day of the week."></picture>
+</p>
+<p>
+  <picture><source media="(prefers-color-scheme: dark)" srcset="assets/monthly-dark.svg"><img src="assets/monthly-light.svg" width="49%" alt="Contributions per month."></picture>
   <picture><source media="(prefers-color-scheme: dark)" srcset="assets/languages-dark.svg"><img src="assets/languages-light.svg" width="49%" alt="Languages across my public repositories, by code size."></picture>
 </p>
+
+### Work
+
+<p>
+  <picture><source media="(prefers-color-scheme: dark)" srcset="assets/work-dark.svg"><img src="assets/work-light.svg" width="100%" alt="Work in numbers from bahrul.me: projects shipped, clients, case studies and years in the field."></picture>
+</p>
+<p>
+  <picture><source media="(prefers-color-scheme: dark)" srcset="assets/career-dark.svg"><img src="assets/career-light.svg" width="100%" alt="Career timeline of every role, current roles highlighted."></picture>
+</p>
+<p>
+  <picture><source media="(prefers-color-scheme: dark)" srcset="assets/toolbox-dark.svg"><img src="assets/toolbox-light.svg" width="100%" alt="The tools I work with, grouped by area."></picture>
+</p>
+
+Currently at **[KYZN](https://kyzn.life)** and co-founder of **[Growthacker](https://growthacker.id)**. The full story, case studies and writing are on **[bahrul.me](https://bahrul.me)**.
 
 ### Tools I build
 
@@ -48,15 +63,6 @@ I'm a go-to-market engineer in Indonesia. I build websites and apps for business
 - **[MidTest](https://github.com/bahrulbangsawan/midtest)**: a desktop agent for AI-powered app testing and walkthrough generation.
 - **[invoice-gen](https://github.com/bahrulbangsawan/invoice-gen)**: an invoice generator with an AI assistant and PDF export.
 
-### Where I work
-
-- **[KYZN](https://kyzn.life)**, since 2022: marketing operations, funnel optimization and data infrastructure for a family wellness club.
-- **[Growthacker](https://growthacker.id)**, co-founder since 2021: growth strategy, SEO and conversion work for business clients.
-
-### What I build with
-
-TypeScript · TanStack Start · React · Cloudflare Workers · Bun · PostgreSQL · Rust · Swift
-
 <p align="center">
-  <sub>Have a project in mind? <a href="https://bahrul.me/book">Book a call</a> or write to <a href="mailto:project@bahrul.me">project@bahrul.me</a>.</sub>
+  <sub>Every number and chart on this page is rebuilt daily from the GitHub API and <a href="https://bahrul.me/developers">bahrul.me's public API</a>.</sub>
 </p>

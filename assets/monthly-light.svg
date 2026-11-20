@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 320" width="620" height="320" role="img" aria-labelledby="t d">
+  <title id="t">Contributions per month</title>
+  <desc id="d">Nov 2025 1, Dec 2025 74, Jan 2026 205, Feb 2026 238, Mar 2026 116, Apr 2026 187, May 2026 303, Jun 2026 291, Jul 2026 1,772, Aug 2026 872, Sep 2026 1,082, Oct 2026 1,260, Nov 2026 1,625</desc>
+  <style>
+    .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
+    .mono { font-family: 'Geist Mono', ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Monaco, Consolas, 'Liberation Mono', monospace; }
+    .num { font-variant-numeric: tabular-nums; }
+    .fu { animation: fu .7s cubic-bezier(.2,.7,.2,1) both; }
+    .pulse { animation: pulse 2.4s ease-in-out infinite; }
+    .growx, .growy { transform-box: fill-box; animation: 20s cubic-bezier(.2,.7,.2,1) infinite both; }
+    .growx { transform-origin: left center; animation-name: growx; }
+    .growy { transform-origin: center bottom; animation-name: growy; }
+    @keyframes fu { from { opacity: 0; transform: translateY(10px); } }
+    @keyframes pulse { 50% { opacity: .35; } }
+    @keyframes growx { 0% { transform: scaleX(0); opacity: 0; } 1% { opacity: 1; } 7% { transform: scaleX(1); } 95% { transform: scaleX(1); opacity: 1; } 100% { transform: scaleX(1); opacity: 0; } }
+    @keyframes growy { 0% { transform: scaleY(0); opacity: 0; } 1% { opacity: 1; } 7% { transform: scaleY(1); } 95% { transform: scaleY(1); opacity: 1; } 100% { transform: scaleY(1); opacity: 0; } }
+    
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; }
+      .cover { display: none; }
+    }
+  </style>
+  <rect x="0.5" y="0.5" width="619" height="319" rx="16" fill="#faf9f6" stroke="#dedcd8"/>
+  <circle class="pulse" cx="40.0" cy="49.6" r="4" fill="#c10007"/>
+  <text x="54.0" y="54" class="mono" font-size="13" font-weight="600" letter-spacing="2.1" fill="#c10007">MONTH BY MONTH</text>
+  <text x="584.0" y="54" class="sans num" font-size="15" text-anchor="end" fill="#5e5d5a">Peak in <tspan font-weight="700" fill="#1e1e1d">July 2026</tspan></text>
+  <line x1="36" y1="250" x2="584" y2="250" stroke="#dedcd8"/>
+  <path class="growy" style="animation-delay:0.00s" d="M41.9,250 V250.0 Q41.9,247.0 44.9,247.0 H69.3 Q72.3,247.0 72.3,250.0 V250 Z" fill="#c10007"/>
+  <text x="57.1" y="274" class="sans" font-size="13" text-anchor="middle" fill="#6f6e6b">Nov</text>
+  <path class="growy" style="animation-delay:0.05s" d="M84.1,250 V248.2 Q84.1,244.2 88.1,244.2 H110.4 Q114.4,244.2 114.4,248.2 V250 Z" fill="#c10007"/>
+  <text x="99.2" y="274" class="sans" font-size="13" text-anchor="middle" fill="#6f6e6b">Dec</text>
+  <path class="growy" style="animation-delay:0.10s" d="M126.2,250 V238.0 Q126.2,234.0 130.2,234.0 H152.6 Q156.6,234.0 156.6,238.0 V250 Z" fill="#c10007"/>
+  <text x="141.4" y="274" class="sans" font-size="13" text-anchor="middle" fill="#6f6e6b">Jan</text>
+  <path class="growy" style="animation-delay:0.15s" d="M168.4,250 V235.5 Q168.4,231.5 172.4,231.5 H194.7 Q198.7,231.5 198.7,235.5 V250 Z" fill="#c10007"/>
+  <text x="183.5" y="274" class="sans" font-size="13" text-anchor="middle" fill="#6f6e6b">Feb</text>
+  <path class="growy" style="animation-delay:0.20s" d="M210.5,250 V245.0 Q210.5,241.0 214.5,241.0 H236.9 Q240.9,241.0 240.9,245.0 V250 Z" fill="#c10007"/>
+  <text x="225.7" y="274" class="sans" font-size="13" text-anchor="middle" fill="#6f6e6b">Mar</text>
+  <path class="growy" style="animation-delay:0.25s" d="M252.7,250 V239.4 Q252.7,235.4 256.7,235.4 H279.0 Q283.0,235.4 283.0,239.4 V250 Z" fill="#c10007"/>
+  <text x="267.8" y="274" class="sans" font-size="13" text-anchor="middle" fill="#6f6e6b">Apr</text>
+  <path class="growy" style="animation-delay:0.30s" d="M294.8,250 V230.4 Q294.8,226.4 298.8,226.4 H321.2 Q325.2,226.4 325.2,230.4 V250 Z" fill="#c10007"/>
+  <text x="310.0" y="274" class="sans" font-size="13" text-anchor="middle" fill="#6f6e6b">May</text>
+  <path class="growy" style="animation-delay:0.35s" d="M337.0,250 V231.3 Q337.0,227.3 341.0,227.3 H363.3 Q367.3,227.3 367.3,231.3 V250 Z" fill="#c10007"/>
+  <text x="352.2" y="274" class="sans" font-size="13" text-anchor="middle" fill="#6f6e6b">Jun</text>
+  <path class="growy" style="animation-delay:0.40s" d="M379.1,250 V116.0 Q379.1,112.0 383.1,112.0 H405.5 Q409.5,112.0 409.5,116.0 V250 Z" fill="#c10007"/>
+  <text x="394.3" y="103.0" class="sans num" font-size="14" font-weight="700" text-anchor="middle" fill="#1e1e1d">1,772</text>
+  <text x="394.3" y="274" class="sans" font-size="13" text-anchor="middle" fill="#1e1e1d">Jul</text>
+  <path class="growy" style="animation-delay:0.45s" d="M421.3,250 V186.1 Q421.3,182.1 425.3,182.1 H447.6 Q451.6,182.1 451.6,186.1 V250 Z" fill="#c10007"/>
+  <text x="436.5" y="274" class="sans" font-size="13" text-anchor="middle" fill="#6f6e6b">Aug</text>
+  <path class="growy" style="animation-delay:0.50s" d="M463.4,250 V169.7 Q463.4,165.7 467.4,165.7 H489.8 Q493.8,165.7 493.8,169.7 V250 Z" fill="#c10007"/>
+  <text x="478.6" y="274" class="sans" font-size="13" text-anchor="middle" fill="#6f6e6b">Sep</text>
+  <path class="growy" style="animation-delay:0.55s" d="M505.6,250 V155.9 Q505.6,151.9 509.6,151.9 H531.9 Q535.9,151.9 535.9,155.9 V250 Z" fill="#c10007"/>
+  <text x="520.8" y="274" class="sans" font-size="13" text-anchor="middle" fill="#6f6e6b">Oct</text>
+  <path class="growy" style="animation-delay:0.60s" d="M547.7,250 V127.4 Q547.7,123.4 551.7,123.4 H574.1 Q578.1,123.4 578.1,127.4 V250 Z" fill="#c10007"/>
+  <text x="562.9" y="274" class="sans" font-size="13" text-anchor="middle" fill="#6f6e6b">Nov</text>
+</svg>

@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 138 44" width="138" height="44" role="img" aria-labelledby="t d">
+  <title id="t">LinkedIn</title>
+  <desc id="d">LinkedIn</desc>
+  <style>
+    .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
+    .mono { font-family: 'Geist Mono', ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Monaco, Consolas, 'Liberation Mono', monospace; }
+    .num { font-variant-numeric: tabular-nums; }
+    .fu { animation: fu .7s cubic-bezier(.2,.7,.2,1) both; }
+    .pulse { animation: pulse 2.4s ease-in-out infinite; }
+    .growx, .growy { transform-box: fill-box; animation: 20s cubic-bezier(.2,.7,.2,1) infinite both; }
+    .growx { transform-origin: left center; animation-name: growx; }
+    .growy { transform-origin: center bottom; animation-name: growy; }
+    @keyframes fu { from { opacity: 0; transform: translateY(10px); } }
+    @keyframes pulse { 50% { opacity: .35; } }
+    @keyframes growx { 0% { transform: scaleX(0); opacity: 0; } 1% { opacity: 1; } 7% { transform: scaleX(1); } 95% { transform: scaleX(1); opacity: 1; } 100% { transform: scaleX(1); opacity: 0; } }
+    @keyframes growy { 0% { transform: scaleY(0); opacity: 0; } 1% { opacity: 1; } 7% { transform: scaleY(1); } 95% { transform: scaleY(1); opacity: 1; } 100% { transform: scaleY(1); opacity: 0; } }
+    
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; }
+      .cover { display: none; }
+    }
+  </style>
+  <rect x="0.5" y="0.5" width="137" height="43" rx="10" fill="#1e1e1d" stroke="#2e2e2d"/>
+  <path transform="translate(17.0 13.0) scale(0.7500)" fill="#faf9f6" d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+  <text x="46" y="27.5" class="sans" font-size="16" font-weight="600" fill="#faf9f6">LinkedIn</text>
+</svg>

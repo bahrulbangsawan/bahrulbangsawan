@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 165 44" width="165" height="44" role="img" aria-labelledby="t d">
+  <title id="t">Book a call</title>
+  <desc id="d">Book a call</desc>
+  <style>
+    .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
+    .mono { font-family: 'Geist Mono', ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Monaco, Consolas, 'Liberation Mono', monospace; }
+    .num { font-variant-numeric: tabular-nums; }
+    .fu { animation: fu .7s cubic-bezier(.2,.7,.2,1) both; }
+    .pulse { animation: pulse 2.4s ease-in-out infinite; }
+    .growx, .growy { transform-box: fill-box; animation: 20s cubic-bezier(.2,.7,.2,1) infinite both; }
+    .growx { transform-origin: left center; animation-name: growx; }
+    .growy { transform-origin: center bottom; animation-name: growy; }
+    @keyframes fu { from { opacity: 0; transform: translateY(10px); } }
+    @keyframes pulse { 50% { opacity: .35; } }
+    @keyframes growx { 0% { transform: scaleX(0); opacity: 0; } 1% { opacity: 1; } 7% { transform: scaleX(1); } 95% { transform: scaleX(1); opacity: 1; } 100% { transform: scaleX(1); opacity: 0; } }
+    @keyframes growy { 0% { transform: scaleY(0); opacity: 0; } 1% { opacity: 1; } 7% { transform: scaleY(1); } 95% { transform: scaleY(1); opacity: 1; } 100% { transform: scaleY(1); opacity: 0; } }
+    
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; }
+      .cover { display: none; }
+    }
+  </style>
+  <rect x="0.5" y="0.5" width="164" height="43" rx="10" fill="#faf9f6" stroke="#faf9f6"/>
+  <g transform="translate(16 12) scale(0.8333)" fill="none" stroke="#121212" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></g>
+  <text x="46" y="27.5" class="sans" font-size="16" font-weight="600" fill="#121212">Book a call</text>
+</svg>

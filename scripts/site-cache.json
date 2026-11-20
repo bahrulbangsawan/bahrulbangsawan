@@ -1,0 +1,247 @@
+{
+ "profile": {
+  "name": "Bahrul Bangsawan",
+  "title": "GTM Engineer",
+  "headline": "I help businesses get more customers. I build their websites, automate repetitive marketing work, and set up data that shows what works.",
+  "location": {
+   "city": "Makassar",
+   "country": "Indonesia",
+   "countryCode": "ID"
+  },
+  "availableForHire": true,
+  "email": "project@bahrul.me",
+  "url": "https://bahrul.me/",
+  "description": "Bahrul Bangsawan is a GTM (go-to-market) Engineer in Indonesia who helps businesses get more customers with websites, marketing automation, and data.",
+  "socialLinks": [
+   {
+    "platform": "Instagram",
+    "url": "https://instagram.com/bahrulbangsawan"
+   },
+   {
+    "platform": "LinkedIn",
+    "url": "https://linkedin.com/in/bahrulbangsawan"
+   },
+   {
+    "platform": "X (Twitter)",
+    "url": "https://x.com/work_bahrul"
+   },
+   {
+    "platform": "Threads",
+    "url": "https://threads.net/@bahrulbangsawan"
+   }
+  ],
+  "booking": {
+   "url": "https://bahrul.me/book",
+   "durationMinutes": 30,
+   "timezone": "Asia/Makassar",
+   "hours": "9:00-17:00",
+   "weekdaysOnly": true
+  },
+  "experience": [
+   {
+    "company": "KYZN",
+    "period": "Feb 2022 – Present",
+    "description": "Digital Marketing, Product Growth Analyst, and Data Engineer. Leading marketing operations, multi-channel funnel optimization, and data infrastructure for a family wellness club.",
+    "url": "https://kyzn.life"
+   },
+   {
+    "company": "Article36",
+    "period": "Jul 2024 – Dec 2024",
+    "description": "Digital Strategist driving brand awareness, paid advertising optimization, and marketing automation for a design agency.",
+    "url": "https://www.article36.agency"
+   },
+   {
+    "company": "Skill Academy by Ruangguru",
+    "period": "Aug 2023 – Nov 2023",
+    "description": "Assistant Lecturer for digital marketing strategy and keyword research webinar training.",
+    "url": "https://skillacademy.com"
+   },
+   {
+    "company": "The Surga Villa Estate",
+    "period": "May 2022 – Aug 2023",
+    "description": "Digital Strategist handling paid advertising analysis, social media management, and website design for a luxury Bali villa estate.",
+    "url": "http://thesurga.com"
+   },
+   {
+    "company": "The Rabbit Wins",
+    "period": "Aug 2022 – Aug 2023",
+    "description": "Digital Strategist managing pre-launch social media strategy, content planning, and lead generation across all digital channels.",
+    "url": null
+   },
+   {
+    "company": "Growthacker",
+    "period": "Sep 2021 – Present",
+    "description": "Co-Founder and Chief of Hacker at a business acceleration and growth hacking provider, offering consultation and online boot camps.",
+    "url": "https://growthacker.id"
+   },
+   {
+    "company": "Mulai Coding",
+    "period": "Aug 2021 – Jan 2022",
+    "description": "Digital Strategist managing social media, community of 10,400+ members, and customer engagement for an edutech coding platform.",
+    "url": "https://mulaicoding.com"
+   },
+   {
+    "company": "Sultan Alauddin Hotel & Convention",
+    "period": "Jun 2019 – Jul 2019",
+    "description": "IT Support Technician handling network maintenance, website development, and IT procurement.",
+    "url": null
+   },
+   {
+    "company": "Chevalier Laboratory SAS",
+    "period": "Jan 2018 – Dec 2019",
+    "description": "Assistant Lecturer at a student-run lab in Telkom University, supporting practicum sessions in web, Android, and game development.",
+    "url": "https://chevalier.labs.telkomuniversity.ac.id"
+   },
+   {
+    "company": "Badan Mentoring Telkom University",
+    "period": "Dec 2016 – May 2018",
+    "description": "Mentor facilitating Islamic mentoring sessions, academic support, and religious activities for first-year students.",
+    "url": null
+   },
+   {
+    "company": "Badan Pemeriksa Keuangan RI",
+    "period": "Oct 2016 – Dec 2016",
+    "description": "IT Support Intern troubleshooting network systems, managing data input, and maintaining hardware at Indonesia's Audit Board.",
+    "url": "https://sulsel.bpk.go.id"
+   }
+  ],
+  "techStack": [
+   {
+    "name": "TypeScript",
+    "category": "Development"
+   },
+   {
+    "name": "React",
+    "category": "Development"
+   },
+   {
+    "name": "Next.js",
+    "category": "Development"
+   },
+   {
+    "name": "Tailwind CSS",
+    "category": "Development"
+   },
+   {
+    "name": "Python",
+    "category": "Development"
+   },
+   {
+    "name": "Node.js",
+    "category": "Development"
+   },
+   {
+    "name": "Google Analytics",
+    "category": "Analytics & Data"
+   },
+   {
+    "name": "PostgreSQL",
+    "category": "Analytics & Data"
+   },
+   {
+    "name": "Supabase",
+    "category": "Analytics & Data"
+   },
+   {
+    "name": "Ahrefs",
+    "category": "Marketing & SEO"
+   },
+   {
+    "name": "Meta",
+    "category": "Marketing & SEO"
+   },
+   {
+    "name": "WordPress",
+    "category": "Marketing & SEO"
+   },
+   {
+    "name": "Shopify",
+    "category": "Marketing & SEO"
+   },
+   {
+    "name": "Webflow",
+    "category": "Marketing & SEO"
+   },
+   {
+    "name": "Figma",
+    "category": "Design"
+   },
+   {
+    "name": "Canva",
+    "category": "Design"
+   },
+   {
+    "name": "Framer",
+    "category": "Design"
+   },
+   {
+    "name": "Midjourney",
+    "category": "Design"
+   },
+   {
+    "name": "OpenAI",
+    "category": "AI & Automation"
+   },
+   {
+    "name": "Anthropic",
+    "category": "AI & Automation"
+   },
+   {
+    "name": "Cursor",
+    "category": "AI & Automation"
+   },
+   {
+    "name": "n8n",
+    "category": "AI & Automation"
+   },
+   {
+    "name": "Cloudflare",
+    "category": "Cloud & DevOps"
+   },
+   {
+    "name": "Vercel",
+    "category": "Cloud & DevOps"
+   },
+   {
+    "name": "Docker",
+    "category": "Cloud & DevOps"
+   },
+   {
+    "name": "GitHub",
+    "category": "Cloud & DevOps"
+   },
+   {
+    "name": "Stripe",
+    "category": "Payments"
+   }
+  ],
+  "clients": [
+   "Sultan Alauddin",
+   "EastCoach",
+   "SkillAcademy by Ruanguru",
+   "Badan Pemerika Keuangan RI",
+   "Setiap Hari Panen",
+   "Badan Mentoring Tel-U",
+   "The Rabbit Twins",
+   "Article36",
+   "Makassar Go",
+   "Merah Karya Gemilang",
+   "KYZN",
+   "KYZN Preschool",
+   "Wellmove Therapy",
+   "Mokanata",
+   "MTs Darussalam Serui",
+   "Celebes Niaga Jaya",
+   "BelaDiri",
+   "Mulai Coding",
+   "The Surga Villa Estate",
+   "Pemerintah Daerah Kab. Kepulauan Yapen",
+   "Kesbangpol Kab. Kepulauan Yapen",
+   "Growthacker",
+   "BisaHukum"
+  ]
+ },
+ "projects": 33,
+ "cases": 6,
+ "articles": 5
+}
