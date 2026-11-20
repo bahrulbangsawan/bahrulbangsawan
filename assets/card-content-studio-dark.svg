@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 236" width="620" height="236" role="img" aria-labelledby="title desc">
+  <title id="title">Content Studio</title>
+  <desc id="desc">A Claude skill and CLI that builds educational Instagram carousels and Reels.</desc>
+  <defs>
+    <style>
+      .sans { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Inter, Helvetica, Arial, sans-serif; }
+      .mono { font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace; }
+    </style>
+  </defs>
+  <rect x="0.5" y="0.5" width="619" height="235" rx="15.5" fill="#1e1e1d" stroke="#2f2f2f"/>
+  <text x="36" y="54" class="mono" font-size="14" letter-spacing="2.4" fill="#bd9f65">CLAUDE CODE SKILL</text>
+  <text x="35" y="102" class="sans" font-size="34" font-weight="600" letter-spacing="-0.8" fill="#faf9f6">Content Studio</text>
+  <text x="36" y="142" class="sans" font-size="20" fill="#b4b4b2">A Claude skill and CLI that builds educational</text>
+  <text x="36" y="171" class="sans" font-size="20" fill="#b4b4b2">Instagram carousels and Reels.</text>
+  <text x="36" y="206" class="mono" font-size="14" fill="#8fa3bf">bahrulbangsawan/content-studio  →</text>
+</svg>
