@@ -555,6 +555,10 @@ def heatmap(t: dict, s: dict) -> str:
     gy = 118
     fills = [mix(t["cell"], t["red"], a) for a in LEVEL_ALPHA]
 
+    steps = len(weeks) * 7
+    step = 0.09  # seconds the snake spends on each cell
+    loop = steps * step
+
     cols, months, last_label = [], [], -9
     prev_month = None
     for i, week in enumerate(weeks):
@@ -568,15 +572,32 @@ def heatmap(t: dict, s: dict) -> str:
                 )
                 last_label = i
         prev_month = month
-        rects = "".join(
-            f'<rect x="{x:.1f}" y="{gy + d["weekday"] * pitch}" width="{cell}" height="{cell}" rx="4" fill="{fills[d["level"]]}"/>'
-            for d in week
-        )
-        # Outer group: one-time rise. Inner group: the light sweep that repeats.
-        cols.append(
-            f'  <g class="wk" style="animation-delay:{0.15 + i * 0.016:.3f}s">'
-            f'<g class="sw" style="animation-delay:{1.6 + i * 0.05:.2f}s">{rects}</g></g>'
-        )
+        rects = []
+        for d in week:
+            y = gy + d["weekday"] * pitch
+            rects.append(f'<rect x="{x:.1f}" y="{y}" width="{cell}" height="{cell}" rx="4" fill="{fills[0]}"/>')
+            if d["level"]:
+                # The snake reaches this cell at step k, eats it, and it grows back later.
+                k = 7 * i + (d["weekday"] if i % 2 == 0 else 6 - d["weekday"])
+                rects.append(
+                    f'<rect class="eat" style="animation-delay:{k * step - loop:.2f}s" x="{x:.1f}" y="{y}" '
+                    f'width="{cell}" height="{cell}" rx="4" fill="{fills[d["level"]]}"/>'
+                )
+        cols.append(f'  <g class="wk" style="animation-delay:{0.15 + i * 0.016:.3f}s">{"".join(rects)}</g>')
+
+    # The snake walks the grid column by column, down one and up the next, one cell per step.
+    frames = []
+    for i in range(len(weeks)):
+        x = gx + i * pitch
+        ys = (gy, gy + 6 * pitch) if i % 2 == 0 else (gy + 6 * pitch, gy)
+        frames.append(f"{7 * i / steps * 100:.4f}% {{ transform: translate({x:.1f}px, {ys[0]}px); animation-timing-function: steps(6, end); }}")
+        frames.append(f"{(7 * i + 6) / steps * 100:.4f}% {{ transform: translate({x:.1f}px, {ys[1]}px); animation-timing-function: steps(1, end); }}")
+    frames.append(f"100% {{ transform: translate({gx:.1f}px, {gy}px); }}")
+    snake = "\n".join(
+        f'    <rect class="seg" style="animation-delay:{j * step:.2f}s" width="{cell}" height="{cell}" rx="3" '
+        f'fill="{t["text"]}" opacity="{o}"/>'
+        for j, o in reversed(list(enumerate((1, 0.82, 0.64, 0.48, 0.34, 0.22))))
+    )
 
     day_labels = "\n".join(
         f'  <text x="{gx - 12:.1f}" y="{gy + row * pitch + 13}" class="sans" font-size="13" text-anchor="end" fill="{t["faint"]}">{name}</text>'
@@ -598,13 +619,19 @@ def heatmap(t: dict, s: dict) -> str:
 {chr(10).join(months)}
 {day_labels}
 {chr(10).join(cols)}
+  <g class="snake">
+{snake}
+  </g>
   <text x="{left:.1f}" y="{ly + 13}" class="sans" font-size="13" fill="{t["faint"]}">Public and private work · updated {updated}</text>
 {chr(10).join(legend)}"""
     css = (
         ".wk { animation: wk .5s cubic-bezier(.2,.7,.2,1) both; }"
-        " .sw { animation: sw 7s ease-in-out infinite; }"
+        f" .eat {{ animation: eat {loop:.2f}s linear infinite; }}"
+        f" .seg {{ animation: crawl {loop:.2f}s infinite both; }}"
         " @keyframes wk { from { opacity: 0; transform: translateY(6px); } }"
-        " @keyframes sw { 0%, 9%, 100% { opacity: 1; } 4.5% { opacity: .28; } }"
+        " @keyframes eat { 0%, 11% { opacity: 0; } 17%, 100% { opacity: 1; } }"
+        " @keyframes crawl { " + " ".join(frames) + " }"
+        " @media (prefers-reduced-motion: reduce) { .snake { display: none; } }"
     )
     return svg(
         w,
