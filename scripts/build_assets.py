@@ -30,6 +30,7 @@ SITE = "https://bahrul.me"
 ROOT = Path(__file__).resolve().parent
 OUT = ROOT.parent / "assets"
 CACHE = ROOT / "site-cache.json"
+HISTORY = ROOT / "history.json"
 ICONS: dict[str, str] = json.loads((ROOT / "icons.json").read_text())
 
 SANS = "Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif"
@@ -206,10 +207,34 @@ def fetch_site() -> dict:
             "articles": get_json(f"{SITE}/api/v1/articles")["count"],
         }
         CACHE.write_text(json.dumps(site, indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
-        return site
+        return {**site, "fresh": True}
     except Exception as err:  # the site being down must not break the profile
         print(f"bahrul.me unreachable ({err}); using scripts/site-cache.json")
         return json.loads(CACHE.read_text(encoding="utf-8"))
+
+
+WORK_KEYS = ("projects", "clients", "cases", "articles")
+BASELINE_DAYS = 30  # compare with the log entry about this old
+MIN_BASELINE_DAYS = 7  # and show no trend until the log reaches back this far
+
+
+def work_baseline(s: dict, fresh: bool) -> dict | None:
+    """Record today's work numbers in the running log and return the entry to compare against.
+
+    bahrul.me's API has no history, so the daily build keeps its own: one row per day in
+    scripts/history.json. Rows are only written from a live answer, never from the cache.
+    """
+    log = json.loads(HISTORY.read_text(encoding="utf-8")) if HISTORY.exists() else []
+    today = s["today"].isoformat()
+    if fresh:
+        log = [row for row in log if row["date"] != today]
+        log.append({"date": today, **{k: s[k] for k in WORK_KEYS}})
+        log = sorted(log, key=lambda row: row["date"])[-400:]
+        HISTORY.write_text(json.dumps(log, indent=0) + "\n", encoding="utf-8")
+    old = [row for row in log if (s["today"] - dt.date.fromisoformat(row["date"])).days >= MIN_BASELINE_DAYS]
+    if not old:
+        return None
+    return min(old, key=lambda row: abs((s["today"] - dt.date.fromisoformat(row["date"])).days - BASELINE_DAYS))
 
 
 def parse_month(text: str, today: dt.date) -> dt.date | None:
@@ -569,7 +594,7 @@ def trend(now: float, before: float, unit: str = "%") -> tuple[str, str] | None:
         label = f"{round(now / before):,}\u00d7" if change >= 1000 else f"{change:+d}%"
     else:
         change = round(now - before)
-        label = f"{change:+d} {unit if abs(change) != 1 else unit.rstrip('s')}"
+        label = f"{change:+d} {unit if abs(change) != 1 else unit.rstrip('s')}".strip()
     if change == 0:
         return ("flat", "no change")
     return ("up" if change > 0 else "down", label.replace("-", "\u2212"))
@@ -690,13 +715,23 @@ def github_tiles(t: dict, s: dict) -> str:
 def work_tiles(t: dict, s: dict) -> str:
     first = min((r["start"] for r in s["roles"]), default=s["today"])
     years = s["today"].year - first.year - ((s["today"].month, s["today"].day) < (first.month, first.day))
+    base = s.get("work_baseline")
+    if base:
+        then = dt.date.fromisoformat(base["date"])
+        when = f'on {then.strftime("%b")} {then.day}'
+
+    def tile(label: str, key: str, sub: str) -> dict:
+        if not base or key not in base:
+            return {"label": label, "value": s[key], "sub": sub}
+        return {"label": label, "value": s[key], "sub": f"{num(base[key])} {when}", "trend": trend(s[key], base[key], "")}
+
     return tiles(
         t,
         "Work in numbers, from bahrul.me",
         [
-            {"label": "PROJECTS SHIPPED", "value": s["projects"], "sub": "live on bahrul.me"},
-            {"label": "CLIENTS", "value": s["clients"], "sub": "businesses worked with"},
-            {"label": "CASE STUDIES", "value": s["cases"], "sub": "written up in detail"},
+            tile("PROJECTS SHIPPED", "projects", "live on bahrul.me"),
+            tile("CLIENTS", "clients", "businesses worked with"),
+            tile("CASE STUDIES", "cases", "written up in detail"),
             {"label": "YEARS IN THE FIELD", "value": years, "sub": f"since {first.year}"},
         ],
     )
@@ -1082,7 +1117,9 @@ def card(t: dict, c: dict, s: dict) -> str:
 
 
 def main() -> None:
-    s = summarize(fetch_github(), fetch_site())
+    site = fetch_site()
+    s = summarize(fetch_github(), site)
+    s["work_baseline"] = work_baseline(s, bool(site.get("fresh")))
     OUT.mkdir(parents=True, exist_ok=True)
     for stale in OUT.glob("*.svg"):
         stale.unlink(missing_ok=True)
