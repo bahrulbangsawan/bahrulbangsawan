@@ -52,12 +52,12 @@
   <text x="1177.1" y="100" class="sans num" font-size="13" text-anchor="middle" fill="#8e8e8c">2026</text>
   <line x1="1216.0" y1="110" x2="1216.0" y2="516" stroke="#2e2e2d"/>
   <text x="64" y="141" class="sans" font-size="16" font-weight="600" fill="#faf9f6">KYZN</text>
-  <rect class="growx" style="animation-delay:0.00s" x="833.6" y="130" width="375.0" height="12" rx="6" fill="#ff6467"/>
-  <circle class="pulse" cx="1202.5" cy="136" r="3" fill="#121212"/>
+  <rect class="growx" style="animation-delay:0.00s" x="833.6" y="130" width="375.2" height="12" rx="6" fill="#ff6467"/>
+  <circle class="pulse" cx="1202.8" cy="136" r="3" fill="#121212"/>
   <text x="821.6" y="141" class="sans" font-size="13" text-anchor="end" fill="#b4b4b2">since Feb 2022</text>
   <text x="64" y="177" class="sans" font-size="16" font-weight="600" fill="#faf9f6">Growthacker</text>
-  <rect class="growx" style="animation-delay:0.06s" x="801.0" y="166" width="407.5" height="12" rx="6" fill="#ff6467"/>
-  <circle class="pulse" cx="1202.5" cy="172" r="3" fill="#121212"/>
+  <rect class="growx" style="animation-delay:0.06s" x="801.0" y="166" width="407.8" height="12" rx="6" fill="#ff6467"/>
+  <circle class="pulse" cx="1202.8" cy="172" r="3" fill="#121212"/>
   <text x="789.0" y="177" class="sans" font-size="13" text-anchor="end" fill="#b4b4b2">since Sep 2021</text>
   <text x="64" y="213" class="sans" font-size="16" font-weight="400" fill="#b4b4b2">Article36</text>
   <rect class="growx" style="animation-delay:0.12s" x="1021.3" y="202" width="32.6" height="12" rx="6" fill="#b4b4b2"/>
